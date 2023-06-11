@@ -1,0 +1,17 @@
+.rectangle {
+  background-color: lightblue;
+  height: 150px;
+  width: 100%;
+}
+
+.number {
+  font-size: 20px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.item-list {
+  max-height: 100px;
+  overflow-y: hidden;
+  padding-left: 10px;
+}

@@ -16,12 +16,32 @@ interface CalendarDay {
 export class CalendarComponent implements OnInit {
 
   calendarDay: CalendarDay[][] = [];
-  currentDate: Date = new Date(new Date().getFullYear(), 3);
+  currentDate: Date = new Date();
+
+  currentMonth:string = ''
+
+  testItems: string[] = ['Carnage', 'Poker']
 
   constructor(private readonly eventService: EventService) { }
 
   ngOnInit(): void {
     // this.getEvents('03-06-2022_00:00:00', '04-06-2024_23:59:59')
+    this.updateCalendar()
+  }
+
+  previousMonth(): void {
+    this.currentDate.setMonth(this.currentDate.getMonth() - 1)
+    this.updateCalendar()
+  }
+
+  nextMonth(): void {
+    this.currentDate.setMonth(this.currentDate.getMonth() + 1)
+    this.updateCalendar()
+  }
+
+  private updateCalendar(): void {
+    this.currentMonth = this.currentDate.toLocaleString('en-GB', { month: 'long' });
+    this.calendarDay = []
     this.generateCalendar()
   }
 
@@ -31,7 +51,7 @@ export class CalendarComponent implements OnInit {
     )
   }
 
-  generateCalendar(): void {
+  private generateCalendar(): void {
     const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
     const lastDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
 
@@ -42,8 +62,12 @@ export class CalendarComponent implements OnInit {
     console.log(lastDayOfLastWeek)
 
     const daysInMonth = lastDayOfMonth.getDate();
-    const totalDays = firstDayOfFirstWeek + daysInMonth;
+    // const totalDays = firstDayOfFirstWeek + daysInMonth;
+
+    const totalDays = daysInMonth + firstDayOfFirstWeek + (6 - lastDayOfLastWeek);
+
     const weeksInMonth = Math.ceil(totalDays / 7);
+
     console.log(`Weeks in month: ${weeksInMonth}`)
 
     let dayOfMonth = 0

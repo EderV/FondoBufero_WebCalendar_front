@@ -1,22 +1,31 @@
-<table>
-  <thead>
-  <tr>
-<!--    <th *ngFor="let day of calendarDays">{{ day.dayOfWeek }}</th>-->
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-    <th>Saturday</th>
-    <th>Sunday</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let week of calendarDay">
-    <td *ngFor="let day of week">
-      <ng-container *ngIf="day.isCurrentMonth">{{day.dayOfMonth}}</ng-container>
-      <ng-container *ngIf="!day.isCurrentMonth">{{day.dayOfMonth}}</ng-container>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<section class="month-selector">
+  <button (click)="previousMonth()"><--</button>
+  <div class="month">
+    <h2>{{currentMonth}}</h2>
+  </div>
+  <button (click)="nextMonth()">--></button>
+</section>
+<section class="calendar">
+  <table>
+    <thead>
+      <tr>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let week of calendarDay">
+      <td *ngFor="let day of week">
+  <!--      <ng-container *ngIf="day.isCurrentMonth">{{day.dayOfMonth}}</ng-container>-->
+        <app-day-event *ngIf="day.isCurrentMonth" [dayNumber]="day.dayOfMonth" [eventTitles]="testItems"></app-day-event>
+  <!--      <ng-container *ngIf="!day.isCurrentMonth">{{day.dayOfMonth}}</ng-container>-->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
