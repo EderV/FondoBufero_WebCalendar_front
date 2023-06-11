@@ -1,0 +1,22 @@
+<table>
+  <thead>
+  <tr>
+<!--    <th *ngFor="let day of calendarDays">{{ day.dayOfWeek }}</th>-->
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+    <th>Sunday</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let week of calendarDay">
+    <td *ngFor="let day of week">
+      <ng-container *ngIf="day.isCurrentMonth">{{day.dayOfMonth}}</ng-container>
+      <ng-container *ngIf="!day.isCurrentMonth">{{day.dayOfMonth}}</ng-container>
+    </td>
+  </tr>
+  </tbody>
+</table>
