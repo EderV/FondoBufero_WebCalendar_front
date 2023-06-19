@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Event} from "../models/Event";
 
 @Injectable({
@@ -14,7 +14,20 @@ export class EventService {
   constructor(private readonly http: HttpClient) { }
 
   getEventsBetweenDates(startDate: string, endDate: string): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.API}/${startDate}/${endDate}`)
+    return this.http.get<Event[]>(`${this.API}/${startDate}/${endDate}`).pipe(
+      map((events: Event[] | null) => {
+        if (events === null) {
+          return [];
+        }
+        return events.map((event: Event) => {
+          return {
+            ...event,
+            date: event.date ? new Date(event.date) : null,
+            createdAt: event.createdAt ? new Date(event.createdAt): null
+          } as Event;
+        });
+      })
+    );
   }
 
 }

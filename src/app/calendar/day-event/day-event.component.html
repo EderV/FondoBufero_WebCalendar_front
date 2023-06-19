@@ -1,7 +1,7 @@
 <div class="rectangle">
   <h2 class="number">{{dayNumber}}</h2>
   <hr>
-  <ng-container *ngIf="eventTitles">
-    <h5 *ngFor="let eventTitle of eventTitles" class="item-list">{{eventTitle}}</h5>
+  <ng-container *ngIf="events">
+    <h5 *ngFor="let event of events" class="item-list">{{event.title}}</h5>
   </ng-container>
 </div>

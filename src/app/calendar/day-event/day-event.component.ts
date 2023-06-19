@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Event} from "../../global/models/Event";
 
 @Component({
   selector: 'app-day-event',
@@ -8,6 +9,6 @@ import {Component, Input} from '@angular/core';
 export class DayEventComponent {
 
   @Input() dayNumber!: number
-  @Input() eventTitles!: string[]
+  @Input() events!: Event[]
 
 }

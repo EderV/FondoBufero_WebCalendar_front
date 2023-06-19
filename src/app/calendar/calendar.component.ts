@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from "../global/services/event.service";
+import {Event} from "../global/models/Event";
 
 interface CalendarDay {
   isCurrentMonth: boolean
   dayOfMonth: number
+  events: Event[]
   // date: Date
   // dayOfWeek: string
 }
@@ -15,110 +17,148 @@ interface CalendarDay {
 })
 export class CalendarComponent implements OnInit {
 
-  calendarDay: CalendarDay[][] = [];
-  currentDate: Date = new Date();
+  calendarDay: CalendarDay[][] = []
+  allEventsInMonth: Event[] = []
+  currentDate: Date = new Date()
+  currentMonth: string = ''
 
-  currentMonth:string = ''
-
-  testItems: string[] = ['Carnage', 'Poker']
+  overlayWait = false
+  errorReachingData = false
 
   constructor(private readonly eventService: EventService) { }
 
   ngOnInit(): void {
-    // this.getEvents('03-06-2022_00:00:00', '04-06-2024_23:59:59')
+    this.overlayWait = true
+    this.updateCalendar()
+  }
+
+  reload(): void {
+    this.overlayWait = true
+    this.currentDate = new Date()
     this.updateCalendar()
   }
 
   previousMonth(): void {
+    this.overlayWait = true
     this.currentDate.setMonth(this.currentDate.getMonth() - 1)
     this.updateCalendar()
   }
 
   nextMonth(): void {
+    this.overlayWait = true
     this.currentDate.setMonth(this.currentDate.getMonth() + 1)
     this.updateCalendar()
   }
 
   private updateCalendar(): void {
-    this.currentMonth = this.currentDate.toLocaleString('en-GB', { month: 'long' });
-    this.calendarDay = []
-    this.generateCalendar()
+    const firstDayOfMonth = this.getFirstDayOfMonth(this.currentDate)
+    const lastDayOfMonth = this.getLastDayOfMonth(this.currentDate)
+
+    const firstDayOfMonthString = this.formatDate(firstDayOfMonth) + '_00:00:00'
+    const lastDayOfMonthString = this.formatDate(lastDayOfMonth) + '_23:59:59'
+
+    this.getEvents(firstDayOfMonthString, lastDayOfMonthString)
   }
 
   private getEvents(startDate: string, endDate: string) {
-    this.eventService.getEventsBetweenDates(startDate, endDate).subscribe(
-      (events) => console.log(events)
-    )
+    this.eventService.getEventsBetweenDates(startDate, endDate).subscribe({
+      next: (events) => {
+        this.allEventsInMonth = events
+        console.log('Events:')
+        console.log(this.allEventsInMonth)
+
+        this.currentMonth = this.currentDate.toLocaleString('en-GB', { month: 'long' });
+        this.calendarDay = []
+        this.generateCalendar()
+
+        this.errorReachingData = false
+        this.overlayWait = false
+      },
+      error: (error) => {
+        console.log(`Failed getting events. ${error}`)
+
+        this.errorReachingData = true
+        this.overlayWait = false
+      }
+    })
+  }
+
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Los meses en JavaScript van de 0 a 11, por eso se suma 1
+    const year = date.getFullYear();
+
+    const formattedDay = day.toString().padStart(2, '0');
+    const formattedMonth = month.toString().padStart(2, '0');
+
+    return (`${formattedDay}-${formattedMonth}-${year}`);
   }
 
   private generateCalendar(): void {
-    const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
-    const lastDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
+    const firstDayOfMonth = this.getFirstDayOfMonth(this.currentDate)
+    const lastDayOfMonth = this.getLastDayOfMonth(this.currentDate)
+
+    let dayIndex = firstDayOfMonth;
 
     const firstDayOfFirstWeek = firstDayOfMonth.getDay() === 0 ? 7 : firstDayOfMonth.getDay()
-    const lastDayOfLastWeek =  lastDayOfMonth.getDay() === 0 ? 7 : lastDayOfMonth.getDay()
+    const lastDayOfLastWeek = lastDayOfMonth.getDay() === 0 ? 7 : lastDayOfMonth.getDay()
 
     console.log(firstDayOfFirstWeek)
     console.log(lastDayOfLastWeek)
 
     const daysInMonth = lastDayOfMonth.getDate();
-    // const totalDays = firstDayOfFirstWeek + daysInMonth;
 
     const totalDays = daysInMonth + firstDayOfFirstWeek + (6 - lastDayOfLastWeek);
 
     const weeksInMonth = Math.ceil(totalDays / 7);
 
-    console.log(`Weeks in month: ${weeksInMonth}`)
-
     let dayOfMonth = 0
     for (let week = 1; week <= weeksInMonth; week++) {
       const weekArray: CalendarDay[] = []
 
-      let firstDayOfFirstWeekFound = false
-      let lastDayOfLastWeekFound = false
-
       for (let dayInWeek = 1; dayInWeek <= 7; dayInWeek++) {
-        const calendarDay: CalendarDay = {dayOfMonth: dayOfMonth, isCurrentMonth: true}
+        const calendarDay: CalendarDay = {
+          dayOfMonth: dayOfMonth,
+          isCurrentMonth: true,
+          events: []
+        };
 
-        if (week === 1) {
-          if (dayInWeek === firstDayOfFirstWeek) {
-            firstDayOfFirstWeekFound = true
-          }
-          if (firstDayOfFirstWeekFound) {
-            dayOfMonth++
-            calendarDay.isCurrentMonth = true
-            calendarDay.dayOfMonth = dayOfMonth
-          }
-          else {
-            calendarDay.isCurrentMonth = false
-            calendarDay.dayOfMonth = 0
-          }
-        }
-        else if (week === weeksInMonth) {
-          if (!lastDayOfLastWeekFound) {
-            dayOfMonth++
-            calendarDay.isCurrentMonth = true
-            calendarDay.dayOfMonth = dayOfMonth
-          }
-          else {
-            calendarDay.isCurrentMonth = false
-            calendarDay.dayOfMonth = 0
-          }
-          if (dayInWeek === lastDayOfLastWeek) {
-            lastDayOfLastWeekFound = true
-          }
-        }
-        else {
-          dayOfMonth++
-          calendarDay.dayOfMonth = dayOfMonth
+        if ((week === 1 && dayInWeek < firstDayOfFirstWeek) ||
+          (week === weeksInMonth && dayInWeek > lastDayOfLastWeek)
+        ) {
+          calendarDay.isCurrentMonth = false;
+          calendarDay.dayOfMonth = 0;
+        } else {
+          dayOfMonth++;
+          calendarDay.dayOfMonth = dayOfMonth;
+          calendarDay.events = this.allEventsInMonth.filter((event: Event) => {
+            if (event.date === null || event.date === undefined) {
+              return false
+            }
+            else {
+              return (event.date.getDate() === dayIndex.getDate() &&
+                event.date.getMonth() === dayIndex.getMonth() &&
+                event.date.getFullYear() === dayIndex.getFullYear())
+            }
+          })
+
+          console.log(calendarDay)
+          dayIndex.setDate(dayIndex.getDate() + 1);
         }
 
-        weekArray.push(calendarDay)
+        weekArray.push(calendarDay);
       }
 
       this.calendarDay.push(weekArray)
     }
+  }
 
+  private getFirstDayOfMonth(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), 1);
+  }
+
+  private getLastDayOfMonth(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0);
   }
 
 }
