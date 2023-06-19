@@ -10,12 +10,12 @@ import {environment} from "../../../environments/environment";
 })
 export class LoginService {
 
-  private readonly API = environment.api;
+  private readonly API = environment.api + '/api/auth';
 
   constructor(private readonly http: HttpClient) { }
 
   login(userLogin: UserLogin): Observable<UserToken> {
-    return this.http.post<UserToken>(`${this.API}/api/auth/login`, userLogin)
+    return this.http.post<UserToken>(`${this.API}/login`, userLogin)
   }
 
 }
