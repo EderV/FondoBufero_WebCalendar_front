@@ -3,6 +3,8 @@ import {LoginService} from "../global/services/login.service";
 import {UserLogin, UserToken} from "../global/models/User";
 import {SessionStorageService} from "../global/services/session-storage.service";
 import {compareSegments} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/segment_marker";
+import {Router} from "@angular/router";
+import {Logger} from "../global/utils/logger";
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,8 @@ export class LoginComponent implements OnInit {
   userLogin: UserLogin = {username: '', password: ''}
 
   constructor(
+    private readonly logger: Logger,
+    private readonly router: Router,
     private readonly loginService: LoginService,
     private readonly sessionStorageService: SessionStorageService
   ) { }
@@ -26,9 +30,9 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.userLogin).subscribe({
       next: (userToken: UserToken) => {
         this.sessionStorageService.setItem('user', userToken)
-        // TODO Redirect to admin panel
+        this.router.navigate(['/admin'])
       },
-      error: (error) => console.log('Error in login: ', error)
+      error: (error) => this.logger.e(`Error login in. Error: ${error.error}`)
     })
   }
 

@@ -30,4 +30,12 @@ export class EventService {
     );
   }
 
+  saveEvent(event: Event): Observable<string> {
+    return this.http.post<string>(`${this.API}/admin/save`, event)
+  }
+
+  deleteEvent(event: Event): Observable<string> {
+    return this.http.delete<string>(`${this.API}/admin/delete`, {body: event})
+  }
+
 }

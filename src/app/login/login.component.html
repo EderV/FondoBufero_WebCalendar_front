@@ -1,11 +1,19 @@
-<div>
-  <label>Username</label>
-  <input type="text" id="username" name="username" [(ngModel)]="userLogin.username" #username>
-</div>
-<div>
-  <label>Password</label>
-  <input type="password" id="password" name="password" [(ngModel)]="userLogin.password" #password>
-</div>
-<div>
-  <button (click)="submitLogin()">Login</button>
-</div>
+<section class="container">
+  <section class="container-login">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput type="text" [(ngModel)]="userLogin.username">
+      <button *ngIf="userLogin.username" matSuffix mat-icon-button aria-label="Clear" (click)="userLogin.username=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="userLogin.password">
+      <button *ngIf="userLogin.password" matSuffix mat-icon-button aria-label="Clear" (click)="userLogin.password=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="submitLogin()">Primary</button>
+  </section>
+</section>

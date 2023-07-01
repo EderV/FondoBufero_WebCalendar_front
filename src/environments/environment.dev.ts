@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  api: '',
-  enableLogging: false
+  api: 'http://localhost:8080',
+  enableLogging: true
 };
 
 /*

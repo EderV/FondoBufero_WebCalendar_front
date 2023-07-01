@@ -5,9 +5,10 @@
   margin-top: 20px;
 }
 
-.container-login {
+.container-form {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  max-width: 400px;
+  overflow: hidden;
+  width: 80%;
+  max-width: 600px;
 }
