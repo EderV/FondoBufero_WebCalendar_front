@@ -5,7 +5,7 @@ import {Logger} from "../../global/utils/logger";
 import {Router} from "@angular/router";
 import {EventService} from "../../global/services/event.service";
 import {Event} from "../../global/models/Event";
-import {MTX_DATETIME_FORMATS} from "@ng-matero/extensions/core";
+import {FileLogosService} from "../../global/services/file-logos.service";
 
 const initEvent: Event = {
   id: '',
@@ -13,13 +13,13 @@ const initEvent: Event = {
   description: '',
   owner: '',
   logo: '',
-  date: new Date(0),
+  date: undefined,
   duration: 0,
   type: '',
   link: '',
   canceled: false,
   cancelReason: '',
-  createdAt: new Date(0)
+  createdAt: undefined
 }
 
 @Component({
@@ -33,6 +33,7 @@ export class EventFormComponent implements OnInit {
   @Output() submitEvent = new EventEmitter<Event>()
 
   eventForm!: FormGroup;
+  overlayWait = false
 
   type: MtxDatetimepickerType = 'datetime';
   mode: MtxDatetimepickerMode = 'portrait';
@@ -43,32 +44,64 @@ export class EventFormComponent implements OnInit {
   timeInterval = 1;
   timeInput = true;
 
+  eventTypes: string[] = ['Game', 'Event', 'Podcast', 'Vote', 'Polkadot event']
+  logosNames: string[] = []
+
   constructor(
     private readonly logger: Logger,
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
+    private readonly fileLogosService: FileLogosService,
     private readonly eventService: EventService
   ) { }
 
   ngOnInit() {
+    this.getLogosList()
     this.updateForm(initEvent)
   }
 
   submitForm(): void {
-    const event = this.eventForm.value as Event
-    event.date = new Date(event.date.getTime() - event.date.getTimezoneOffset() * 60000)
+    console.log(this.eventForm.get('date')?.value)
 
-    this.logger.i(event)
+    if (this.eventForm.valid) {
+      const event = this.eventForm.value as Event
 
-    this.submitEvent.emit(event)
+      // if (event.date !== undefined) {
+      //   event.date = new Date(event.date.getTime() - event.date.getTimezoneOffset() * 60000)
+      // }
+
+      this.logger.i(event)
+
+      this.submitEvent.emit(event)
+    }
+  }
+
+  clearForm() {
+    this.updateForm(initEvent)
   }
 
   updateForm(event: Event) {
     this.eventForm = this.initForm(event)
   }
 
+  private getLogosList() {
+    this.overlayWait = true
+    this.fileLogosService.getLogosNames().subscribe({
+      next: (logosNames) => {
+        this.logosNames = logosNames
+
+        this.overlayWait = false
+      },
+      error: (error) => {
+        this.logger.e(error)
+        this.overlayWait = false
+      }
+    })
+  }
+
   private initForm(event: Event): FormGroup {
     return this.formBuilder.group({
+      id: event.id,
       title: event.title,
       description: event.description,
       owner: event.owner,
@@ -77,6 +110,7 @@ export class EventFormComponent implements OnInit {
       duration: event.duration,
       type: event.type,
       link: event.link,
+      canceled: [`${event.canceled}`],
       cancelReason: event.cancelReason
     })
   }

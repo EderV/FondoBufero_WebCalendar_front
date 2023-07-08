@@ -1,0 +1,7 @@
+<input type="file" (change)="onFileSelected($event)" accept="image/*">
+
+<mat-card *ngIf="previewUrl">
+  <img [src]="previewUrl" alt="Vista previa de la imagen">
+</mat-card>
+
+<button mat-raised-button color="primary" (click)="onUploadImage()">Upload Image</button>

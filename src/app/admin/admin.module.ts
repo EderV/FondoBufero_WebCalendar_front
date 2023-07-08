@@ -19,6 +19,8 @@ import { EventFormComponent } from './event-form/event-form.component';
 import {MatIconModule} from "@angular/material/icon";
 import {CalendarModule} from "../calendar/calendar.module";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatSelectModule} from "@angular/material/select";
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import {MatRadioModule} from "@angular/material/radio";
     AddEventComponent,
     EventEditorComponent,
     EventViewComponent,
-    EventFormComponent
+    EventFormComponent,
+    UploadImageComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import {MatRadioModule} from "@angular/material/radio";
     MatCardModule,
     MatIconModule,
     CalendarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSelectModule
   ]
 })
 export class AdminModule { }

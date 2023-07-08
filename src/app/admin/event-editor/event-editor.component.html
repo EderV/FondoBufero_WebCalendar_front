@@ -22,7 +22,7 @@
     </div>
   </article>
   <article class="column">
-    <app-event-form #eventFormComponent [fullForm]="true"></app-event-form>
+    <app-event-form #eventFormComponent [fullForm]="true" (submitEvent)="updateEvent($event)"></app-event-form>
   </article>
 </section>
 <section>

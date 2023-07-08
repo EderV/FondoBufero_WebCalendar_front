@@ -28,19 +28,19 @@ export class EventEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.overlayWait = true
-    this.updateEvents()
+    this.reloadEvents()
   }
 
   previousMonth(): void {
     this.overlayWait = true
     this.currentDate.setMonth(this.currentDate.getMonth() - 1)
-    this.updateEvents()
+    this.reloadEvents()
   }
 
   nextMonth(): void {
     this.overlayWait = true
     this.currentDate.setMonth(this.currentDate.getMonth() + 1)
-    this.updateEvents()
+    this.reloadEvents()
   }
 
   eventSelected(event: Event) {
@@ -52,7 +52,26 @@ export class EventEditorComponent implements OnInit {
     this.eventService.deleteEvent(event).subscribe({
       next: (res) => {
         this.logger.i(`Deleted successfully: ${res}`)
-        this.updateEvents()
+        this.reloadEvents()
+        this.overlayWait = false
+        this.eventFormComponent.clearForm()
+      },
+      error: (error) => {
+        this.logger.e(error.error)
+        if (error.status === 401) {
+          this.router.navigate(['/login'])
+        }
+        this.overlayWait = false
+      }
+    })
+  }
+
+  updateEvent(event: Event) {
+    this.overlayWait = true
+    this.eventService.updateEvent(event).subscribe({
+      next: (res) => {
+        this.logger.i(`Updated successfully: ${res}`)
+        this.reloadEvents()
         this.overlayWait = false
       },
       error: (error) => {
@@ -60,11 +79,12 @@ export class EventEditorComponent implements OnInit {
         if (error.status === 401) {
           this.router.navigate(['/login'])
         }
+        this.overlayWait = false
       }
     })
   }
 
-  private updateEvents(): void {
+  private reloadEvents(): void {
     const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
     const lastDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
 
@@ -89,6 +109,9 @@ export class EventEditorComponent implements OnInit {
     this.eventService.getEventsBetweenDates(startDate, endDate).subscribe({
       next: (events) => {
         this.events = events
+
+        console.log(events)
+
         this.currentMonth = this.currentDate.toLocaleString('en-GB', { month: 'long' });
 
         this.overlayWait = false
