@@ -22,4 +22,8 @@ export class FileLogosService {
     return this.http.get<string[]>(`${this.API}/admin/logos-list`)
   }
 
+  downloadLogo(): Observable<Blob> {
+    return this.http.get(`${this.API}/admin/logos/Captura.PNG`, {responseType: 'blob'})
+  }
+
 }

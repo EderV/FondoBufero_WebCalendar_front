@@ -14,6 +14,8 @@ export class UploadImageComponent {
   selectedImage?: File | null
   previewUrl?: string | ArrayBuffer | null
 
+  previewDownload?: string | ArrayBuffer | null
+
   constructor(
     private readonly logger: Logger,
     private readonly fileLogosService: FileLogosService,
@@ -58,6 +60,18 @@ export class UploadImageComponent {
     else {
       this.logger.e("Please select an image to upload")
     }
+  }
+
+  onDownloadImage() {
+    this.fileLogosService.downloadLogo().subscribe({
+      next: (image) => {
+        const fileReader = new FileReader()
+        fileReader.onload = (e: any) => {
+          this.previewDownload = e.target.result
+        }
+        fileReader.readAsDataURL(image)
+      }
+    })
   }
 
 }
