@@ -4,6 +4,14 @@ export interface UserLogin {
 }
 
 export interface UserToken {
-  id: string,
-  accessToken: string
+  userId: string,
+  accessToken: string,
+  sessionExpiration: number
+}
+
+export interface UserStorage {
+  userId: string,
+  accessToken: string,
+  loginDate: Date,
+  sessionExpirationDate: Date
 }

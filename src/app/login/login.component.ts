@@ -1,8 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../global/services/login.service";
-import {UserLogin, UserToken} from "../global/models/User";
+import {UserLogin, UserStorage, UserToken} from "../global/models/User";
 import {SessionStorageService} from "../global/services/session-storage.service";
-import {compareSegments} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/segment_marker";
 import {Router} from "@angular/router";
 import {Logger} from "../global/utils/logger";
 
@@ -29,7 +28,10 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     this.loginService.login(this.userLogin).subscribe({
       next: (userToken: UserToken) => {
-        this.sessionStorageService.setItem('user', userToken)
+        const userStorage = this.createUserStorage(userToken)
+
+        this.sessionStorageService.clear()
+        this.sessionStorageService.setItem('user', userStorage)
         this.router.navigate(['/admin'])
       },
       error: (error) => this.logger.e(`Error login in. Error: ${error.error}`)
@@ -40,4 +42,18 @@ export class LoginComponent implements OnInit {
     console.log('User:')
     console.log(this.sessionStorageService.getItem('user'))
   }
+
+  private createUserStorage(userToken: UserToken): UserStorage {
+    const loginDate = new Date()
+    const expirationDate = new Date()
+    expirationDate.setMinutes(loginDate.getMinutes() + userToken.sessionExpiration)
+
+    return {
+      userId: userToken.userId,
+      accessToken: userToken.accessToken,
+      loginDate: loginDate,
+      sessionExpirationDate: expirationDate
+    }
+  }
+
 }
