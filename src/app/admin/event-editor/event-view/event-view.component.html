@@ -1,0 +1,38 @@
+<section>
+  <article *ngIf="event">
+    <div (click)="onComponentClicked()">
+      <div *ngIf="event.title">
+        <h3>Title: {{event.title}}</h3>
+      </div>
+      <div *ngIf="event.description">
+        <h3>Description: {{event.description}}</h3>
+      </div>
+      <div *ngIf="event.owner">
+        <h3>Owner: {{event.owner}}</h3>
+      </div>
+      <div *ngIf="event.logo">
+        <h3>Logo: {{event.logo}}</h3>
+      </div>
+      <div *ngIf="event.date">
+        <h3>Date: {{event.date}}</h3>
+      </div>
+      <div *ngIf="event.duration">
+        <h3>Duration: {{event.duration}} minutes</h3>
+      </div>
+      <div *ngIf="event.type">
+        <h3>Type: {{event.type}}</h3>
+      </div>
+      <div *ngIf="event.link">
+        <h3>Link: {{event.link}}</h3>
+      </div>
+      <div *ngIf="event.canceled">
+        <h3>Canceled: {{event.canceled}}</h3>
+        <h3>Cancel reason: {{event.cancelReason}}</h3>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="onDeleteEvent()">Delete</button>
+  </article>
+  <article *ngIf="!event">
+    <h5>Event is null</h5>
+  </article>
+</section>

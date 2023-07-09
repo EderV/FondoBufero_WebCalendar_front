@@ -1,0 +1,84 @@
+<section class="container">
+  <form (ngSubmit)="submitForm()" [formGroup]="eventForm" class="container-form">
+    <ng-container *ngIf="fullForm">
+      <mat-form-field appearance="fill">
+        <mat-label>ID</mat-label>
+        <input matInput type="text" formControlName="id" [readonly]="true">
+      </mat-form-field>
+    </ng-container>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput type="text" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Owner</mat-label>
+      <input matInput type="text" formControlName="owner" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Logo</mat-label>
+      <mat-select formControlName="logo">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let logo of logosNames" [value]="logo">{{logo}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{type}}</mat-label>
+      <mtx-datetimepicker #datetimePicker
+                          [type]="type"
+                          [mode]="mode"
+                          [multiYearSelector]="multiYearSelector"
+                          [startView]="startView"
+                          [timeInput]="timeInput"></mtx-datetimepicker>
+      <input [mtxDatetimepicker]="datetimePicker" matInput formControlName="date" required>
+      <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Duration</mat-label>
+      <input matInput type="number" formControlName="duration" required>
+      <span matTextSuffix>minutes</span>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let type of eventTypes" [value]="type">{{type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Link</mat-label>
+      <input matInput type="url" formControlName="link">
+    </mat-form-field>
+
+    <ng-container *ngIf="fullForm">
+      <div>
+        <mat-label>Canceled:</mat-label>
+        <mat-radio-group formControlName="canceled">
+          <mat-radio-button value="true">true</mat-radio-button>
+          <mat-radio-button value="false">false</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cancel reason</mat-label>
+        <textarea matInput type="text" formControlName="cancelReason"></textarea>
+      </mat-form-field>
+    </ng-container>
+
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</section>
+<section>
+  <app-overlay-loading [isLoading]="overlayWait"></app-overlay-loading>
+</section>

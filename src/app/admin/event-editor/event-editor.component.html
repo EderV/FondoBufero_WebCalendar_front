@@ -1,0 +1,30 @@
+<section class="container">
+  <article class="column">
+    <div class="month-selector">
+      <button mat-raised-button color="primary" (click)="previousMonth()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="month">
+        <h2>{{currentMonth}}</h2>
+      </div>
+      <button mat-raised-button color="primary" (click)="nextMonth()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+    <div *ngFor="let event of events">
+      <mat-card class="event-card">
+        <app-event-view
+          [event]="event"
+          (eventClicked)="eventSelected($event)"
+          (deleteEvent)="deleteEvent($event)">
+        </app-event-view>
+      </mat-card>
+    </div>
+  </article>
+  <article class="column">
+    <app-event-form #eventFormComponent [fullForm]="true" (submitEvent)="updateEvent($event)"></app-event-form>
+  </article>
+</section>
+<section>
+  <app-overlay-loading [isLoading]="overlayWait"></app-overlay-loading>
+</section>

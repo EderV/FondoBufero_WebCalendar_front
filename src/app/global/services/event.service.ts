@@ -22,12 +22,24 @@ export class EventService {
         return events.map((event: Event) => {
           return {
             ...event,
-            date: event.date ? new Date(event.date) : null,
-            createdAt: event.createdAt ? new Date(event.createdAt): null
+            date: event.date ? new Date(event.date) : undefined,
+            createdAt: event.createdAt ? new Date(event.createdAt): undefined
           } as Event;
         });
       })
     );
+  }
+
+  saveEvent(event: Event): Observable<string> {
+    return this.http.post<string>(`${this.API}/admin/save`, event)
+  }
+
+  updateEvent(event: Event): Observable<string> {
+    return this.http.put<string>(`${this.API}/admin/update`, event)
+  }
+
+  deleteEvent(event: Event): Observable<string> {
+    return this.http.delete<string>(`${this.API}/admin/delete`, {body: event})
   }
 
 }

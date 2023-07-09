@@ -12,12 +12,12 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private sessionStorageService: SessionStorageService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken: UserToken = this.sessionStorageService.getItem('user');
+    const userToken: UserToken = this.sessionStorageService.getItem('user');
 
-    if (authToken) {
+    if (userToken) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${authToken}`
+          Authorization: `Bearer ${userToken.accessToken}`
         }
       });
     }
