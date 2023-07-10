@@ -20,4 +20,8 @@ export class AppComponent {
     this.logger.i(user)
   }
 
+  onClearSessionStorage() {
+    this.sessionStorageService.clear()
+  }
+
 }
