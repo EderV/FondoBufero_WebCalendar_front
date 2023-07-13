@@ -18,6 +18,10 @@ export class FileLogosService {
     return this.http.post(`${this.API}/admin/upload-logo`, formData, {responseType: 'text'})
   }
 
+  // uploadFiles(filenames: string[]): Observable<Blob[]> {
+
+  // }
+
   getLogosNames(): Observable<string[]> {
     return this.http.get<string[]>(`${this.API}/admin/logos-list`)
   }
