@@ -22,7 +22,6 @@ export class EventEditorComponent implements OnInit {
 
   constructor(
     private readonly logger: Logger,
-    private readonly router: Router,
     private readonly eventService: EventService
   ) { }
 
@@ -58,9 +57,6 @@ export class EventEditorComponent implements OnInit {
       },
       error: (error) => {
         this.logger.e(error.error)
-        if (error.status === 401) {
-          this.router.navigate(['/login'])
-        }
         this.overlayWait = false
       }
     })
@@ -76,9 +72,6 @@ export class EventEditorComponent implements OnInit {
       },
       error: (error) => {
         this.logger.e(error.error)
-        if (error.status === 401) {
-          this.router.navigate(['/login'])
-        }
         this.overlayWait = false
       }
     })

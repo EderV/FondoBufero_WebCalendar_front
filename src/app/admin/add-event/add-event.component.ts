@@ -15,7 +15,6 @@ export class AddEventComponent implements OnInit {
 
   constructor(
     private readonly logger: Logger,
-    private readonly router: Router,
     private readonly eventService: EventService
   ) { }
 
@@ -26,12 +25,7 @@ export class AddEventComponent implements OnInit {
   submitForm(event: Event): void {
     this.eventService.saveEvent(event).subscribe({
       next: (success) => console.log(`Successfully saved event: ${success}`),
-      error: (error) => {
-        this.logger.e(error.error)
-        if (error.status === 401) {
-          this.router.navigate(['/login'])
-        }
-      }
+      error: (error) => this.logger.e(error.error)
     })
   }
 
