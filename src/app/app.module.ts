@@ -7,6 +7,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./global/interceptors/auth.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './global/components/page-not-found/page-not-found.component';
+import {JwtInterceptor} from "./global/interceptors/jwt.interceptor";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { PageNotFoundComponent } from './global/components/page-not-found/page-n
         BrowserAnimationsModule
     ],
     providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
     ],
     exports: [],
     bootstrap: [AppComponent]
