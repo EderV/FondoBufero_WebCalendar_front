@@ -1,13 +1,18 @@
-<div class="overlay"></div>
+<div class="overlay" (click)="onClose()"></div>
 <section *ngIf="events" class="popup">
   <mat-tab-group>
-    <mat-tab *ngFor="let event of events" label="{{event.title}}">
+    <mat-tab *ngFor="let eventWithImage of eventsWithImages" label="{{eventWithImage.event.title}}">
       <ng-template matTabContent>
         <section>
-          <h2>Event: {{event.title}}</h2>
+          <div class="circle">
+            <img *ngIf="eventWithImage.imageURL" [src]="eventWithImage.imageURL" alt="Event image">
+          </div>
+          <h2>Event: {{eventWithImage.event.title}}</h2>
         </section>
       </ng-template>
     </mat-tab>
   </mat-tab-group>
-  <button (click)="onClose()">Close</button>
+  <div>
+    <app-overlay-loading [isLoading]="overlayWait"></app-overlay-loading>
+  </div>
 </section>

@@ -157,7 +157,6 @@ export class CalendarComponent implements OnInit {
             }
           })
 
-          console.log(calendarDay)
           dayIndex.setDate(dayIndex.getDate() + 1);
         }
 
