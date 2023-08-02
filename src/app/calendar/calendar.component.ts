@@ -25,6 +25,9 @@ export class CalendarComponent implements OnInit {
   overlayWait = false
   errorReachingData = false
 
+  showDayDetailPopUp = false
+  eventsDetail: Event[] = []
+
   constructor(private readonly eventService: EventService) { }
 
   ngOnInit(): void {
@@ -48,6 +51,18 @@ export class CalendarComponent implements OnInit {
     this.overlayWait = true
     this.currentDate.setMonth(this.currentDate.getMonth() + 1)
     this.updateCalendar()
+  }
+
+  onDayClicked(events: Event[]): void {
+    if (events.length !== 0) {
+      this.showDayDetailPopUp = true
+      this.eventsDetail = events
+    }
+  }
+
+  onPopupDayEventDetailClose(): void {
+    this.showDayDetailPopUp = false
+    this.eventsDetail = []
   }
 
   private updateCalendar(): void {
@@ -142,7 +157,6 @@ export class CalendarComponent implements OnInit {
             }
           })
 
-          console.log(calendarDay)
           dayIndex.setDate(dayIndex.getDate() + 1);
         }
 

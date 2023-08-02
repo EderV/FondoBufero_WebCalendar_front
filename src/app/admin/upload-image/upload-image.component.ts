@@ -16,6 +16,8 @@ export class UploadImageComponent {
 
   previewDownload?: string | ArrayBuffer | null
 
+  previewDownloadMultiple: ArrayBuffer[] = []
+
   constructor(
     private readonly logger: Logger,
     private readonly fileLogosService: FileLogosService,
@@ -71,6 +73,27 @@ export class UploadImageComponent {
         }
         fileReader.readAsDataURL(image)
       }
+    })
+  }
+
+  onDownloadImagesMultiple() {
+    this.fileLogosService.downloadZip().subscribe({
+      next: value => value.then(
+        (result) => {
+          for (let blob of result) {
+            const fileReader = new FileReader()
+            fileReader.onload = (e: any) => {
+              this.previewDownloadMultiple?.push(e.target.result)
+            }
+            fileReader.readAsDataURL(blob)
+          }
+          console.log('La promesa se ha cumplido:', result);
+        },
+        (error) => {
+          console.error('La promesa ha sido rechazada:', error);
+        }
+      ),
+      error: error => console.log(error)
     })
   }
 

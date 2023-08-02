@@ -26,7 +26,7 @@
       <tbody>
       <tr *ngFor="let week of calendarDay">
         <td *ngFor="let day of week">
-          <app-day-event *ngIf="day.isCurrentMonth" [dayNumber]="day.dayOfMonth" [events]="day.events"></app-day-event>
+          <app-day-event *ngIf="day.isCurrentMonth" [dayNumber]="day.dayOfMonth" [events]="day.events" (eventsOnDay)="onDayClicked($event)"></app-day-event>
         </td>
       </tr>
       </tbody>
@@ -35,4 +35,7 @@
 </section>
 <div>
   <app-overlay-loading [isLoading]="overlayWait"></app-overlay-loading>
+</div>
+<div *ngIf="showDayDetailPopUp">
+  <app-day-event-detail (close)="onPopupDayEventDetailClose()" [events]="eventsDetail"></app-day-event-detail>
 </div>

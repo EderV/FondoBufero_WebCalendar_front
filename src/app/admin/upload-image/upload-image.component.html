@@ -5,7 +5,12 @@
 </mat-card>
 
 <button mat-raised-button color="primary" (click)="onUploadImage()">Upload Image</button>
+<button mat-raised-button color="primary" (click)="onDownloadImagesMultiple()">Download Multiple</button>
 
 <!--<button mat-raised-button color="primary" (click)="onDownloadImage()">Download Image</button>-->
 
-<!--<img [src]="previewDownload" alt="no image">-->
+<div *ngIf="previewDownloadMultiple">
+  <ng-container *ngFor="let image of previewDownloadMultiple">
+    <img [src]="image" alt="no image">
+  </ng-container>
+</div>
