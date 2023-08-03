@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Event} from "../../global/models/Event";
-import {Logger} from "../../global/utils/logger";
-import {FileLogosService} from "../../global/services/file-logos.service";
+import {Event} from "../../../../core/models/Event";
+import {Logger} from "../../../../core/utils/logger";
+import {FileLogosService} from "../../../../core/services/file-logos.service";
 
 interface EventWithImage {
   event: Event,

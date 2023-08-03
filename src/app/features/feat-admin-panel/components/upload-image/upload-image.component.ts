@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {Logger} from "../../global/utils/logger";
-import {FileLogosService} from "../../global/services/file-logos.service";
+import {Logger} from "../../../../core/utils/logger";
+import {FileLogosService} from "../../../../core/services/file-logos.service";
 
 @Component({
   selector: 'app-upload-image',

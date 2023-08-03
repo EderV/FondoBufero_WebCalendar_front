@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Event} from "../../../global/models/Event";
-import {Logger} from "../../../global/utils/logger";
+import {Event} from "../../../../../core/models/Event";
+import {Logger} from "../../../../../core/utils/logger";
 
 @Component({
   selector: 'app-event-view',

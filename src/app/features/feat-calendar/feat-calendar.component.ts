@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {EventService} from "../global/services/event.service";
-import {Event} from "../global/models/Event";
+import {EventService} from "../../core/services/event.service";
+import {Event} from "../../core/models/Event";
 
 interface CalendarDay {
   isCurrentMonth: boolean
@@ -12,10 +12,10 @@ interface CalendarDay {
 
 @Component({
   selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  templateUrl: './feat-calendar.component.html',
+  styleUrls: ['./feat-calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class FeatCalendarComponent implements OnInit {
 
   calendarDay: CalendarDay[][] = []
   allEventsInMonth: Event[] = []

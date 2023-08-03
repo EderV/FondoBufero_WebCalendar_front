@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MtxCalendarView, MtxDatetimepickerMode, MtxDatetimepickerType} from "@ng-matero/extensions/datetimepicker";
-import {Event} from "../../global/models/Event";
-import {EventService} from "../../global/services/event.service";
+import {Event} from "../../../../core/models/Event";
+import {EventService} from "../../../../core/services/event.service";
 import {Router} from "@angular/router";
-import {Logger} from "../../global/utils/logger";
+import {Logger} from "../../../../core/utils/logger";
 
 @Component({
   selector: 'app-add-event',

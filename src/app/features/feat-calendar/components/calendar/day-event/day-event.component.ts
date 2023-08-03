@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Event} from "../../global/models/Event";
+import {Event} from "../../../../../core/models/Event";
 
 @Component({
   selector: 'app-day-event',

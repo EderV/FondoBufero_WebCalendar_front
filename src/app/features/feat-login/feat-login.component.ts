@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from "../global/services/login.service";
-import {UserLogin, UserStorage, UserToken} from "../global/models/User";
-import {SessionStorageService} from "../global/services/session-storage.service";
+import {LoginService} from "../../core/services/login.service";
+import {UserLogin, UserStorage, UserToken} from "../../core/models/User";
+import {SessionStorageService} from "../../core/services/session-storage.service";
 import {Router} from "@angular/router";
-import {Logger} from "../global/utils/logger";
+import {Logger} from "../../core/utils/logger";
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './feat-login.component.html',
+  styleUrls: ['./feat-login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class FeatLoginComponent implements OnInit {
 
   userLogin: UserLogin = {username: '', password: ''}
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {EventService} from "../../global/services/event.service";
-import {Logger} from "../../global/utils/logger";
-import {Event} from "../../global/models/Event";
+import {EventService} from "../../../../core/services/event.service";
+import {Logger} from "../../../../core/utils/logger";
+import {Event} from "../../../../core/models/Event";
 import {EventFormComponent} from "../event-form/event-form.component";
 import {Router} from "@angular/router";
 
