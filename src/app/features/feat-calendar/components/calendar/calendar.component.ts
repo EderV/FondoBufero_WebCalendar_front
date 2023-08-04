@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Event} from "../../../../core/models/Event";
 import {EventService} from "../../../../core/services/event.service";
 
@@ -13,7 +13,7 @@ interface CalendarDay {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit{
 
   calendarDay: CalendarDay[][] = []
   allEventsInMonth: Event[] = []

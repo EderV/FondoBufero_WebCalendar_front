@@ -27,4 +27,4 @@ import {CalendarComponent} from "./components/calendar/calendar.component";
     OverlayLoadingComponent
   ]
 })
-export class CalendarModule { }
+export class FeatCalendarModule { }

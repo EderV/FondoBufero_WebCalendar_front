@@ -8,13 +8,11 @@ import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
-import { CalendarComponent } from './feat-calendar/calendar/calendar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        PageNotFoundComponent,
-        CalendarComponent
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,

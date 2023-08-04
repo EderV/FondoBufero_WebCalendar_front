@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {Logger} from "../../core/utils/logger";
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-feat-login',
   templateUrl: './feat-login.component.html',
   styleUrls: ['./feat-login.component.scss']
 })

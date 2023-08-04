@@ -6,11 +6,11 @@ import {authGuard} from "./core/guards/auth.guard";
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./features/feat-login/feat-login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./features/feat-login/feat-login.module').then(m => m.FeatLoginModule)
   },
   {
     path: 'calendar',
-    loadChildren: () => import('./features/feat-calendar/feat-calendar.module').then(m => m.CalendarModule)
+    loadChildren: () => import('./features/feat-calendar/feat-calendar.module').then(m => m.FeatCalendarModule)
   },
   {
     path: 'admin',

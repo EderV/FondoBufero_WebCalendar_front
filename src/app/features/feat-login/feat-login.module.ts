@@ -22,4 +22,4 @@ import {LoginRoutingModule} from "./feat-login-routing.module";
     MatButtonModule
   ]
 })
-export class LoginModule { }
+export class FeatLoginModule { }

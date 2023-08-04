@@ -20,7 +20,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSelectModule} from "@angular/material/select";
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
-import {CalendarModule} from "../feat-calendar/feat-calendar.module";
+import {FeatCalendarModule} from "../feat-calendar/feat-calendar.module";
 
 
 @NgModule({
@@ -45,7 +45,7 @@ import {CalendarModule} from "../feat-calendar/feat-calendar.module";
     MtxNativeDatetimeModule,
     MatCardModule,
     MatIconModule,
-    CalendarModule,
+    FeatCalendarModule,
     MatRadioModule,
     MatSelectModule
   ]
