@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {SessionStorageService} from "./global/services/session-storage.service";
-import {Logger} from "./global/utils/logger";
+import {SessionStorageService} from "./core/services/session-storage.service";
+import {Logger} from "./core/utils/logger";
 
 @Component({
   selector: 'app-root',

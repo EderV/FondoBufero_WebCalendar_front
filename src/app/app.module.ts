@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthInterceptor} from "./global/interceptors/auth.interceptor";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PageNotFoundComponent } from './global/components/page-not-found/page-not-found.component';
-import {JwtInterceptor} from "./global/interceptors/jwt.interceptor";
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
+import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 
 @NgModule({
     declarations: [
