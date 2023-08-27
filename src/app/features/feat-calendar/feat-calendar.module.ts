@@ -8,6 +8,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {FeatCalendarComponent} from "./feat-calendar.component";
 import {CalendarRoutingModule} from "./feat-calendar-routing.module";
 import {CalendarComponent} from "./components/calendar/calendar.component";
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {CalendarComponent} from "./components/calendar/calendar.component";
     DayEventComponent,
     OverlayLoadingComponent,
     DayEventDetailComponent,
-    CalendarComponent
+    CalendarComponent,
+    CarouselComponent
   ],
     imports: [
         CommonModule,
