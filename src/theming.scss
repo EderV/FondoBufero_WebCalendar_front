@@ -1,0 +1,5 @@
+@use './app/app.component' as app;
+
+@mixin applyTheme($theme) {
+  @include app.applyTheme($theme)
+}

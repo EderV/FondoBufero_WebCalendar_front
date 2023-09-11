@@ -8,17 +8,21 @@ import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
+import {NgOptimizedImage} from "@angular/common";
+import { FeatAboutComponent } from './features/feat-about/feat-about.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        FeatAboutComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        NgOptimizedImage
     ],
     providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
