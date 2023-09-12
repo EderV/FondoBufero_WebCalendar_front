@@ -1,0 +1,89 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin applyTheme($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primary-palette: map.get($color-config, 'primary');
+  $accent-palette: map.get($color-config, 'accent');
+
+  .calendar-section {
+    height: auto;
+    width: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .calendar-container {
+    margin: 16px;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: mat.get-color-from-palette($accent-palette, 500);
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+  }
+
+  .month-selector {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    height: 50px;
+
+    .month {
+      background-color: mat.get-color-from-palette($accent-palette, 100);
+      border: 2px solid mat.get-color-from-palette($accent-palette, 100);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 250px;
+      margin-left: 10px;
+      margin-right: 10px;
+
+      h2 {
+        margin: 0;
+        color: mat.get-color-from-palette($primary-palette, 500);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    button {
+      width: 50px;
+      background-color: mat.get-color-from-palette($primary-palette, 500);
+      border: 2px solid mat.get-color-from-palette($primary-palette, 500);
+      border-radius: 6px;
+      color: white;
+      font-size: 24px;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+  }
+
+}
+
+.calendar {
+  //padding-left: 10%;
+  //padding-right: 10%;
+  display: flex;
+  align-items: center;
+  margin: 8px;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+td {
+  width: 25%;
+}

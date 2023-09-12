@@ -1,6 +1,6 @@
-<div class="rectangle" (click)="onDayClicked()">
+<div class="container" (click)="onDayClicked()">
   <h2 class="number">{{dayNumber}}</h2>
-  <hr>
+  <div class="hexagon"></div>
   <ng-container *ngIf="events">
     <h5 *ngFor="let event of events" class="item-list">{{event.title}}</h5>
   </ng-container>

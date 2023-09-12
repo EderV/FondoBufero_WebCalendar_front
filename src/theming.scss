@@ -1,5 +1,9 @@
 @use './app/app.component' as app;
+@use './app/features/feat-calendar/components/calendar/calendar.component' as feat-calendar;
+@use './app/features/feat-calendar/components/calendar/day-event/day-event.component' as feat-calendar-day-event;
 
 @mixin applyTheme($theme) {
-  @include app.applyTheme($theme)
+  @include app.applyTheme($theme);
+  @include feat-calendar.applyTheme($theme);
+  @include feat-calendar-day-event.applyTheme($theme);
 }

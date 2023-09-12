@@ -1,34 +1,40 @@
-<section *ngIf="!errorReachingData">
-  <article class="month-selector">
-    <button (click)="previousMonth()"><--</button>
-    <div class="month">
-      <h2>{{currentMonth}}</h2>
-    </div>
-    <button (click)="nextMonth()">--></button>
-  </article>
-  <article class="calendar">
-    <table>
-      <thead>
-      <tr>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-        <th>Sunday</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let week of calendarDay">
-        <td *ngFor="let day of week">
-          <app-day-event *ngIf="day.isCurrentMonth" [dayNumber]="day.dayOfMonth" [events]="day.events" (eventsOnDay)="onDayClicked($event)"></app-day-event>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </article>
-</section>
+<ng-container *ngIf="!errorReachingData">
+  <div class="calendar-section">
+    <section class="calendar-container">
+      <div class="calendar-header">
+        <article class="month-selector">
+          <button (click)="previousMonth()"><</button>
+          <div class="month">
+            <h2>{{currentMonth}}</h2>
+          </div>
+          <button (click)="nextMonth()">></button>
+        </article>
+      </div>
+      <article class="calendar">
+        <table>
+          <thead>
+          <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let week of calendarDay">
+            <td *ngFor="let day of week">
+              <app-day-event *ngIf="day.isCurrentMonth" [dayNumber]="day.dayOfMonth" [events]="day.events" (eventsOnDay)="onDayClicked($event)"></app-day-event>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </div>
+</ng-container>
 <div>
   <app-overlay-loading [isLoading]="overlayWait"></app-overlay-loading>
 </div>
