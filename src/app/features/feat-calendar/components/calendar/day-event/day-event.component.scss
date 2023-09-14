@@ -7,6 +7,10 @@
   $accent-palette: map.get($color-config, 'accent');
 
   .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: mat.get-color-from-palette($accent-palette, 100);
     border-radius: 6px;
     height: 150px;
@@ -14,17 +18,24 @@
   }
 
   .number {
-    font-size: 20px;
-    padding-left: 10px;
-    padding-top: 10px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.7);
   }
 
-  .hexagon {
+  .circle {
     width: 50px;
     height: 50px;
     background-color: mat.get-color-from-palette($accent-palette, 100);
     border-radius: 50%;
     border: 2px solid mat.get-color-from-palette($primary-palette, 500);
+  }
+
+  .number-events {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.8);
   }
 
   .item-list {
