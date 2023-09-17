@@ -1,30 +1,32 @@
-<header>
-<!--  <section class="header-container">-->
-  <section class="header-container">
-    <div class="logo-container">
-      <img src="assets/polkalendar_logo.png" alt="Polkalendar logo" height="90%">
-    </div>
-    <div class="buttons-container">
-      <button
-        class="route-button-base"
-        [ngClass]="isCalendarActive ? 'route-button-active' : 'route-button-inactive'"
-        (click)="onCalendarButton()"
-      >Calendar</button>
-      <button
-        class="route-button-base"
-        [ngClass]="isAboutActive ? 'route-button-active' : 'route-button-inactive'"
-        (click)="onAboutButton()"
-      >About</button>
-    </div>
-  </section>
-  <section *ngIf="activeProfile === 'dev' && false">
-    <hr>
-    <h2>App name: {{title}}</h2>
-    <button (click)="onReadSessionStorage()">Read SessionStorage</button>
-    <button (click)="onClearSessionStorage()">Clear SessionStorage</button>
-  </section>
-</header>
+<section class="container" id="main-cmp">
+  <header>
+  <!--  <section class="header-container">-->
+    <section class="header-container">
+      <div class="logo-container">
+        <img src="assets/polkalendar_logo.png" alt="Polkalendar logo" height="90%">
+      </div>
+      <div class="buttons-container">
+        <button
+          class="route-button-base"
+          [ngClass]="isCalendarActive ? 'route-button-active' : 'route-button-inactive'"
+          (click)="onCalendarButton()"
+        >Calendar</button>
+        <button
+          class="route-button-base"
+          [ngClass]="isAboutActive ? 'route-button-active' : 'route-button-inactive'"
+          (click)="onAboutButton()"
+        >About</button>
+      </div>
+    </section>
+    <section *ngIf="activeProfile === 'dev' && false">
+      <hr>
+      <h2>App name: {{title}}</h2>
+      <button (click)="onReadSessionStorage()">Read SessionStorage</button>
+      <button (click)="onClearSessionStorage()">Clear SessionStorage</button>
+    </section>
+  </header>
 
-<hr class="header-separator">
+  <hr class="header-separator">
+</section>
 
 <router-outlet></router-outlet>

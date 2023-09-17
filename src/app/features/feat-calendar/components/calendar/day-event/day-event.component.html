@@ -1,4 +1,4 @@
-<div class="container" (click)="onDayClicked()">
+<div class="container" id="day-event-cmp" (click)="onDayClicked()">
   <h2 class="number">{{dayNumber}}</h2>
   <div class="circle" *ngIf="events.length > 0">
     <h3 class="number-events">{{events.length}}</h3>
