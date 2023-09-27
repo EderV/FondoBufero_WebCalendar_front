@@ -60,17 +60,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 8px;
+  margin: 0 8px 8px;
+
+  .week-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    padding: 4px;
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
 
   table {
     width: 100%;
     max-width: 1600px;
     table-layout: fixed;
-  }
-
-  th {
-    font-weight: normal;
-    font-size: 18px;
-    padding: 8px;
   }
 }

@@ -20,6 +20,8 @@ export class CalendarComponent implements OnInit{
   currentDate: Date = new Date()
   currentMonth: string = ''
 
+  weekDayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
   overlayWait = false
   errorReachingData = false
 

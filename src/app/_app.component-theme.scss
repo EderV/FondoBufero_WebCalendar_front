@@ -30,7 +30,7 @@
     }
 
     .route-button-inactive:hover {
-      background-color: mat.get-color-from-palette($primary-palette, 200);
+      background-color: mat.get-color-from-palette($accent-palette, 200);
     }
 
   }

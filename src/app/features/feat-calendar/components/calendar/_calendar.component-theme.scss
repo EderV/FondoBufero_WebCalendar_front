@@ -21,6 +21,11 @@
       }
     }
 
+    .week-day {
+      background-color: mat.get-color-from-palette($accent-palette, 100);
+      color: mat.get-color-from-palette($primary-palette, 500);
+    }
+
     button {
       background-color: mat.get-color-from-palette($primary-palette, 500);
       border: 2px solid mat.get-color-from-palette($primary-palette, 500);

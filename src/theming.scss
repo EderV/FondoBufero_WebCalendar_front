@@ -1,9 +1,11 @@
 @use './app/app.component-theme' as app;
+@use './app/core/components/overlay-loading/overlay-loading.component-theme' as overlay-loading;
 @use './app/features/feat-calendar/components/calendar/calendar.component-theme' as feat-calendar;
 @use './app/features/feat-calendar/components/calendar/day-event/day-event.component-theme' as feat-calendar-day-event;
 
 @mixin applyTheme($theme) {
   @include app.applyTheme($theme);
+  @include overlay-loading.applyTheme($theme);
   @include feat-calendar.applyTheme($theme);
   @include feat-calendar-day-event.applyTheme($theme);
 }

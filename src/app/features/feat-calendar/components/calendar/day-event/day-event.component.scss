@@ -17,14 +17,29 @@
 }
 
 .circle {
-  width: 50px;
-  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
+
+  .number-events {
+    font-size: 22px;
+    margin: 0 0 0 0;
+    color: rgba(0, 0, 0, 0.8);
+  }
 }
 
-.number-events {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.8);
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 100px solid transparent; /* Ancho de la base del triángulo */
+  border-bottom: 100px solid transparent; /* Ancho de la base del triángulo */
+  border-left: 100px solid deeppink; /* Altura del triángulo y color de fondo */
+  border-radius: 20px;
+  //border-bottom-left-radius: 50px; /* Redondea la esquina del ángulo obtuso */
+  //border-bottom-right-radius: 50px; /* Redondea la esquina del ángulo obtuso */
 }
 
 .item-list {
